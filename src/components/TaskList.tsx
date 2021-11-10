@@ -39,22 +39,12 @@ export function TaskList() {
     taskIdEqual[0].isComplete = true;
     setTasks([...tasks])
 
-
-
   }
 
   function handleRemoveTask(id: number) {
 
-    // tasks.map(task => {
-    //   const idIsEqual = id === task.id
-    //   console.log(idIsEqual)
-
-    //   if (idIsEqual) {
-    //     console.log(tasks)
-
-    //   }
-
-    // })
+    const taskIdEqual = tasks.filter(task => task.id !== id)
+    setTasks(taskIdEqual)
   }
 
   return (
