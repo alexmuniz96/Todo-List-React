@@ -18,26 +18,26 @@ export function TaskList() {
   function handleCreateNewTask() {
     // Crie uma nova task com um id random, não permita criar caso o título seja vazio.
 
-    const titleIsEmpty = newTaskTitle === ""
+    if (!newTaskTitle) return;
 
-    const task = ({
-      id: (Math.random() * 1000),
+    const newTask = {
+      id: Math.random(),
       title: newTaskTitle,
       isComplete: false,
-    })
-
-    if (titleIsEmpty) {
-      alert("Preeencha o campo")
-    } else {
-      setTasks([...tasks, task])
     }
+
+    setTasks(oldState => [...oldState, newTask])
+    setNewTaskTitle("")
+
   }
 
   function handleToggleTaskCompletion(id: number) {
     // Altere entre `true` ou `false` o campo `isComplete` de uma task com dado ID
-    const taskIdEqual = tasks.filter(task => task.id === id)
-    taskIdEqual[0].isComplete = true;
-    setTasks([...tasks])
+    const newTasks = tasks.map(task => task.id === id ? {
+      ...task,
+      isComplete: !task.isComplete
+    } : task)
+    setTasks(newTasks)
 
   }
 
